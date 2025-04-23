@@ -1,4 +1,3 @@
-// trigger to play music in the background with sweetalert
 window.addEventListener('load', () => {
     Swal.fire({
         title: 'Do you want to play music in the background?',
@@ -9,12 +8,18 @@ window.addEventListener('load', () => {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',
     }).then((result) => {
+        // Show splash screen after modal, before main animation
+        const splash = document.getElementById('splashScreen');
+        splash.style.display = 'flex';
+        // Optional: play music if accepted
         if (result.isConfirmed) {
             document.querySelector('.song').play();
-            animationTimeline();
-        } else {
-            animationTimeline();
         }
+        // Wait 2.5 seconds, then hide splash and start main animation
+        setTimeout(() => {
+            splash.style.display = 'none';
+            animationTimeline();
+        }, 2500);
     });
 });
 
